@@ -1,6 +1,8 @@
 require 'benchmark'
 require 'gchart'
 
+class Shuffle
+
 def shuffle_original
   results = []
   m = 5000
@@ -15,28 +17,33 @@ def shuffle_original
   results
 end
 
-def new_shuffle
-[1]  
+def new_shuffle(array)
+  if array.length == 1
+    array
+  else
+    array.shuffle
+  end
 end
 
+end
 
-generate_graph = Gchart.new(
-  :type => 'line',
-  :size => '450x500',
-  :bar_colors => ['6600cc','b366ff'],
-  :title => "Time Framework for Shuffle Method",
-  :bg => 'EFEFEF',
-  :legend => ['Shuffle Method'],
-  :data => [shuffle_original],
-  :filename => 'images/shuffle_method_graph.png',
-  :stacked => false,
-  :legend_position => 'bottom',
-  :axis_with_labels => [['x'], ['y']],
-  :max_value => 20,
-  :min_value => 0,
-  :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
-  )
+# generate_graph = Gchart.new(
+#   :type => 'line',
+#   :size => '450x500',
+#   :bar_colors => ['6600cc','b366ff'],
+#   :title => "Time Framework for Shuffle Method",
+#   :bg => 'EFEFEF',
+#   :legend => ['Shuffle Method'],
+#   :data => [shuffle_original],
+#   :filename => 'images/shuffle_method_graph.png',
+#   :stacked => false,
+#   :legend_position => 'bottom',
+#   :axis_with_labels => [['x'], ['y']],
+#   :max_value => 20,
+#   :min_value => 0,
+#   :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
+#   )
 
-  generate_graph.file
+#   generate_graph.file
 
   
