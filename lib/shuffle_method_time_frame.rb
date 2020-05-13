@@ -1,7 +1,7 @@
 require 'benchmark'
 require 'gchart'
 
-def shuffle_time_frame
+def shuffle_original
   results = []
   m = 5000
   while m <= 100_000
@@ -15,6 +15,11 @@ def shuffle_time_frame
   results
 end
 
+def new_shuffle
+[1]  
+end
+
+
 generate_graph = Gchart.new(
   :type => 'line',
   :size => '450x500',
@@ -22,7 +27,7 @@ generate_graph = Gchart.new(
   :title => "Time Framework for Shuffle Method",
   :bg => 'EFEFEF',
   :legend => ['Shuffle Method'],
-  :data => [shuffle_time_frame],
+  :data => [shuffle_original],
   :filename => 'images/shuffle_method_graph.png',
   :stacked => false,
   :legend_position => 'bottom',
@@ -33,3 +38,5 @@ generate_graph = Gchart.new(
   )
 
   generate_graph.file
+
+  
