@@ -2,7 +2,8 @@ require 'shuffle_method_time_frame'
 
 describe Shuffle do
 
-  # it { is_expected.to respond_to(:new_shuffle) }
+  it { is_expected.to respond_to(:new_shuffle) }
+
   it 'returns [1] when input [1]' do
     expect(subject.new_shuffle([1])).to eq [1]
   end
