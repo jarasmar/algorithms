@@ -1,7 +1,7 @@
 require 'benchmark'
 require 'gchart'
 
-def time_framework
+def sort_time_frame
   results = []
   m = 5000
   while m <= 100_000
@@ -23,14 +23,14 @@ generate_graph = Gchart.new(
   :title => "Time Framework for Sort Method",
   :bg => 'EFEFEF',
   :legend => ['Sort Method'],
-  :data => [time_framework],
-  :filename => 'images/sort_graph.png',
+  :data => [sort_time_frame],
+  :filename => 'images/sort_method_graph.png',
   :stacked => false,
   :legend_position => 'bottom',
   :axis_with_labels => [['x'], ['y']],
   :max_value => 20,
   :min_value => 0,
-  :axis_labels => [["0|25_000|50_000|75_000|100_000"]],
+  :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
   )
 
  generate_graph.file
