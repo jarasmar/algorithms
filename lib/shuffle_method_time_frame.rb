@@ -58,7 +58,7 @@ class Shuffle < Array
       :stacked => false,
       :legend_position => 'bottom',
       :axis_with_labels => [['x'], ['y']],
-      :max_value => 20,
+      :max_value => 500,
       :min_value => 0,
       :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
       )
