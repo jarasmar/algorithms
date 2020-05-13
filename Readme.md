@@ -1,6 +1,6 @@
 # ALGORITHM COMPLEXITY
 
-## SHUFFLING
+### SHUFFLING
 Mix all the elements in an array to get a random order
 
 ```
@@ -11,8 +11,8 @@ INPUT        | OUTPUT
 []           | error
 ```
 
-## REVERSE
+### REVERSE
 
-## FIND DUPLICATES
+### FIND DUPLICATES
 
-## MOST FREQUENT WORDS
+### MOST FREQUENT WORDS
