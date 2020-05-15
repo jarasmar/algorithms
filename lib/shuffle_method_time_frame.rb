@@ -2,18 +2,23 @@ require 'benchmark'
 require 'gchart'
 
 class Array
-  def new_shuffle(array)
-    shuffle_array = []
-
-    while array.length > 0 do
-      length = array.length - 1
-      index = rand(0..length)
-      shuffle_array << array[index]
-      array.delete_at(index)
-    end
-    shuffle_array
+  def rotation(m)
+    rotate(rand(m))
   end
+  
 end
+  
+  # def new_shuffle(array)
+  #   shuffle_array = []
+
+  #   while array.length > 0 do
+  #     length = array.length - 1
+  #     index = rand(0..length)
+  #     shuffle_array << array[index]
+  #     array.delete_at(index)
+  #   end
+  #   shuffle_array
+  # end
 
 class Shuffle < Array
 
@@ -36,7 +41,7 @@ class Shuffle < Array
     m = 5000
     while m <= 100_000
       time = Benchmark.measure do
-        array = new_shuffle(Array(1..m))
+       Array(1..m).rotation(1000)
       end
       m += 5_000
       # takes the real time  and changes it from seconds to miliseconds
@@ -58,7 +63,7 @@ class Shuffle < Array
       :stacked => false,
       :legend_position => 'bottom',
       :axis_with_labels => [['x'], ['y']],
-      :max_value => 500,
+      :max_value => 10,
       :min_value => 0,
       :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
       )
