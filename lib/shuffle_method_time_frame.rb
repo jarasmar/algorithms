@@ -23,15 +23,20 @@ end
 class Shuffle < Array
 
   def shuffle_original
+    a = start*1000
+    b = ending*1000
     results = []
     m = 5000
-    while m <= 100_000
-      time = Benchmark.measure do
-        array = Array(1..m).shuffle
-      end
+    while m <= 100000
+      # time = Benchmark.measure do
+        a
+        Array(1..m).rotation(1000)
+        # array = Array(1..m).shuffle
+      # end
+        b
       m += 5_000
       # takes the real time  and changes it from seconds to miliseconds
-      results.push(time.real * 1_000)
+      results.push((b - a))
     end
     results
   end
@@ -40,12 +45,14 @@ class Shuffle < Array
     results = []
     m = 5000
     while m <= 100_000
-      time = Benchmark.measure do
+      # time = Benchmark.measure do
+      start
        Array(1..m).rotation(1000)
-      end
+      ending
+      # end
       m += 5_000
       # takes the real time  and changes it from seconds to miliseconds
-      results.push(time.real * 1_000)
+      results.push((ending - start)*1000)
     end
     results
   end
@@ -63,19 +70,33 @@ class Shuffle < Array
       :stacked => false,
       :legend_position => 'bottom',
       :axis_with_labels => [['x'], ['y']],
-      :max_value => 10,
+      :max_value => 0.1,
       :min_value => 0,
       :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
       )
 
     generate_graph.file
   end
+
+  def start
+    Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    end
+   def ending
+   Process.clock_gettime(Process::CLOCK_MONOTONIC)
+   end
+  def timer 
+    a = start
+    b = ending
+      return (b - a)*1000   
+  end
+
 end
 
+
+
 a = Shuffle.new
-a.graph
+# a.graph
 
-p a.new_shuffle_time
+# p a.new_shuffle_time
 p a.shuffle_original
-
 
