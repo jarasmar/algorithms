@@ -23,39 +23,31 @@ end
 class Shuffle < Array
 
   def shuffle_original
-    a = start*1000
-    b = ending*1000
-    results = []
+    # results = []
     m = 5000
     while m <= 100000
-      # time = Benchmark.measure do
-        a
-        Array(1..m).rotation(1000)
-        # array = Array(1..m).shuffle
-      # end
-        b
+      # a = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
+      Array(1..m).shuffle
+      # b = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
       m += 5_000
-      # takes the real time  and changes it from seconds to miliseconds
-      results.push((b - a))
+      # results.push((b-a))
     end
-    results
+    # results
   end
 
   def new_shuffle_time
-    results = []
+    # results = []
     m = 5000
     while m <= 100_000
-      # time = Benchmark.measure do
-      start
+    #  a = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
        Array(1..m).rotation(1000)
-      ending
-      # end
+    #  b = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
       m += 5_000
-      # takes the real time  and changes it from seconds to miliseconds
-      results.push((ending - start)*1000)
+      # results.push((b-a))
     end
-    results
+    #  results
   end
+
 
   def graph
     generate_graph = Gchart.new(
@@ -70,24 +62,26 @@ class Shuffle < Array
       :stacked => false,
       :legend_position => 'bottom',
       :axis_with_labels => [['x'], ['y']],
-      :max_value => 0.1,
+      :max_value => 5,
       :min_value => 0,
       :axis_labels => [["0|20_000|40_000|60_000|80_000|100_000"]],
       )
-
     generate_graph.file
   end
 
   def start
-    Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
     end
    def ending
-   Process.clock_gettime(Process::CLOCK_MONOTONIC)
+   Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
    end
-  def timer 
-    a = start
-    b = ending
-      return (b - a)*1000   
+
+  def timer_function(name_method, times)
+    results = []
+   a = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
+    self.send(name_method)
+   b =  Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
+    return results.push(b-a)
   end
 
 end
@@ -95,8 +89,8 @@ end
 
 
 a = Shuffle.new
-# a.graph
+p a.timer_function(:new_shuffle_time)
+p a.timer_function(:shuffle_original)
 
 # p a.new_shuffle_time
-p a.shuffle_original
-
+# p a.shuffle_original
