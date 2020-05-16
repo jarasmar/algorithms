@@ -18,4 +18,3 @@ INPUT        | OUTPUT
 ### MOST FREQUENT WORDS
 
 
-<a href="http://google.es/">Rafa es es puto amo</a>
