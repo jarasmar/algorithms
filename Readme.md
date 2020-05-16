@@ -12,6 +12,15 @@ INPUT        | OUTPUT
 ```
 
 ### REVERSE
+Reverse the order of the elements in an array
+
+```
+INPUT        | OUTPUT
+[1]          | [1]
+[1, 2]       | [2, 1]
+[1, 2, 3]    | [3, 2, 1]
+[]           | error
+```
 
 ### FIND DUPLICATES
 
