@@ -1,3 +1,6 @@
+# Time framework with build-in graphical outcome. 
+# Refactorizacion will be done in further steps of the project.
+
 require 'benchmark'
 require 'gchart'
 
@@ -43,7 +46,7 @@ class Shuffle < Array
        Array(1..m).rotation(1000)
     #  b = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
       m += 5_000
-      # results.push((b-a))
+    #  results.push((b-a))
     end
     #  results
   end
@@ -69,28 +72,38 @@ class Shuffle < Array
     generate_graph.file
   end
 
-  def start
-    Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
-    end
-   def ending
-   Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
-   end
+  # def start
+  #   Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
+  #   end
+  #  def ending
+  #  Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
+  #  end
 
-  def timer_function(name_method, times)
-    results = []
+  def timer_function(name_method, rounds)
+    global_results = [] # Para meter el resultado del medio o los previos. No utilizado de momento el prubin.
+    result = [] # resultados de las rondas de tiempo.
+    rounds.times do
    a = Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
     self.send(name_method)
    b =  Process.clock_gettime(Process::CLOCK_MONOTONIC)*1000
-    return results.push(b-a)
+    result.push(b-a)
+    end
+    result
   end
+  
+
+
 
 end
 
 
+#--------------------------------------
+# Llamadas de la funcion, el grafico de momento no lo toque asi que no funcionara en este momento, o si lo hace
+# dara datos no relevantes.
 
 a = Shuffle.new
-p a.timer_function(:new_shuffle_time)
-p a.timer_function(:shuffle_original)
+p a.timer_function(:new_shuffle_time, 11)
+# p a.timer_function(:shuffle_original)
 
 # p a.new_shuffle_time
 # p a.shuffle_original
